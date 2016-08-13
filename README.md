@@ -1,81 +1,116 @@
-## Third party libraries
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
+[![Stories in Ready](https://badge.waffle.io/zhukov/webogram.png?label=ready&title=Ready)](https://waffle.io/zhukov/webogram)
 
-### [AngularJS](http://angularjs.org/)
+## [Webogram](https://web.telegram.org) — Telegram Web App
 
-**Author**: Google, Inc.
-**License**: MIT, https://github.com/angular/angular.js/blob/master/LICENSE
+Telegram offers great [apps for mobile communication](https://www.telegram.org). It is based on the [MTProto protocol](https://core.telegram.org/mtproto) and has an [Open API](https://core.telegram.org/api). I personally like Telegram for its speed and cloud-support (that makes a web app possible, unlike in the case of WA and others).
 
-### [JSBN](http://www-cs-students.stanford.edu/~tjw/jsbn/)
+MTProto data can be carried over HTTP (SSL is also supported), so this project is my take at creating one.
 
-**Author**: Tom Wu
-**License**: BSD, http://www-cs-students.stanford.edu/~tjw/jsbn/LICENSE
-
-Biginteger for RSA, PQ prime factorization
+That said, I'm using this app myself and I'd like to share its sources, so anyone can contribute to the development. Any help is welcome!
 
 
-### [jQuery Emojiarea](https://github.com/diy/jquery-emojiarea)
-
-**Author**: diy
-**License**: Apache, Version 2.0, https://github.com/diy/jquery-emojiarea#license
-
-Emoji keyboard and rich-textfield for composing messages with emoticons
+### Interface
 
 
-### [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
-
-**Author**: AngularUI Team, https://github.com/organizations/angular-ui/teams/291112
-**License**: MIT, https://github.com/angular-ui/bootstrap/blob/master/LICENSE
-
-Modal windows
+Here are some screenshots of the interface:
 
 
-### [jQuery](https://github.com/jquery/jquery)
-
-**Author**: jQuery Foundation and other contributors
-**License**: MIT, https://github.com/jquery/jquery/blob/master/LICENSE.txt
-
-Dom manupulations.
-
-### [Bootstrap](https://github.com/twbs/bootstrap)
-
-**Author**: Twitter, Inc
-**License**: MIT, https://github.com/twbs/bootstrap/blob/master/LICENSE
-
-Normalize, CSS-framework
-
-### [nanoScrollerJS](https://github.com/jamesflorentino/nanoScrollerJS)
-
-**Author**: James Florentino
-**License**: MIT, https://github.com/jamesflorentino/nanoScrollerJS/blob/master/LICENSE-MIT
-
-Beautiful OS X Lion-like scrollbars
+![Sample screenshot 1](/app/img/screenshot1.png)
+![Mobile screenshot 2](/app/img/screenshot2.png)
+![Mobile screenshot 3](/app/img/screenshot3.png)
 
 
-### [CryptoJS](https://code.google.com/p/crypto-js/)
+### Unsupported at the moment
 
-**Author**: Jeff Mott
-**License**: BSD-3-Clause, https://code.google.com/p/crypto-js/wiki/License
-
-AES, SHA-1 implementation
-
-### [zlib.js](https://github.com/imaya/zlib.js)
-
-**Author**: imaya
-**License**: MIT, https://github.com/imaya/zlib.js/blob/master/LICENSE
-
-GZIP for decompressing server responses
-
-### [emoji-data](https://github.com/iamcal/emoji-data)
-
-**Author**: iamcal
-**License**: not specified
-
-Build emoji list in apropriate format. Generate sheet in future, when needed.
+* Secret chats
+* Black list
+* ...
 
 
-### [gemoji](https://github.com/github/gemoji)
+### Maintained locations
 
-**Author**: GitHub Inc, 37signals, id Software, whynne@deviantart, Apple Inc.
-**License**: https://github.com/github/gemoji/blob/master/LICENSE
 
-Emoji images
+| Description        | URL           | Type  |
+| ------------- |-------------| -----:|
+| Online Web-version (hosted on Telegram servers)      | https://web.telegram.org/ | hosted
+| Online Web-version (hosted on GitHub pages)      | https://zhukov.github.io/webogram | hosted
+| Chrome Web Store      | [https://chrome.google.com/webstore/detail/telegram/ clhhggbfdinjmjhajaheehoeibfljjno](https://chrome.google.com/webstore/detail/telegram/clhhggbfdinjmjhajaheehoeibfljjno) |   packed
+| Firefox & FirefoxOS Marketplace | https://marketplace.firefox.com/app/telegram |    packed
+
+
+
+**Hosted version**: the app is downloaded via HTTPS as a usual website. Will be available offline due to application cache.
+
+**Packed version**: the app is downloaded at once in a package via HTTPS. The package is updated less frequently than the Web-version.
+
+All of the apps above are submitted and maintained by [@zhukov](https://github.com/zhukov), so feel free to use them and report bugs [here](https://github.com/zhukov/webogram/issues). Please do not report bugs which are only reproducible in different locations.
+
+
+## Technical details
+
+The app is based on the AngularJS JavaScript framework, and written in pure JavaScript. jQuery is used for DOM manipulations, and Bootstrap as the CSS-framework.
+
+
+### Running locally
+
+
+The project repository is based on angularjs-seed and includes gulp tasks, so it's easy to launch the app locally on your desktop.
+Install [node.js](http://nodejs.org/) and run the following commands in the project directory
+
+```
+sudo npm install -g gulp
+npm install
+```
+
+This will install all the needed dependencies.
+
+
+#### Running web-server
+
+
+Just run `gulp watch` to start the web server and the livereload task.
+Open http://localhost:8000/app/index.html in your browser.
+
+
+
+#### Running as Chrome Packaged App
+
+To run this application in Google Chrome as a packaged app, open this URL (in Chrome): `chrome://extensions/`, then tick "Developer mode" and press "Load unpacked extension...". Select the downloaded `app` folder and Webogram should appear in the list.
+
+Run `gulp watch` to watch for file changes and automatically rebuild the app.
+
+
+#### Running as Firefox OS App
+
+To run this application in Firefox as a packaged app, open "Menu" -> "Developer" -> "WebIDE" (or hit `Shift + F8`). Choose "Open packaged app" from the Project menu and select the `app` folder.
+
+Run `gulp watch` to watch for file changes and automatically rebuild the app.
+
+#### Running in production
+
+Run `gulp clean`, then `gulp publish` to build the minimized production version of the app. Copy `dist` folder contents to your web server. Don't forget to set `X-Frame-Options SAMEORIGIN` header ([docs](https://developer.mozilla.org/en-US/docs/Web/HTTP/X-Frame-Options)).
+
+
+### Third party libraries
+
+Besides the frameworks mentioned above, other libraries are used for protocol and UI needs. Here is the short list:
+
+* [JSBN](http://www-cs-students.stanford.edu/~tjw/jsbn/)
+* [CryptoJS](https://code.google.com/p/crypto-js/)
+* [zlib.js](https://github.com/imaya/zlib.js)
+* [UI Bootstrap](http://angular-ui.github.io/bootstrap/)
+* [jQuery Emojiarea](https://github.com/diy/jquery-emojiarea)
+* [nanoScrollerJS](https://github.com/jamesflorentino/nanoScrollerJS)
+* [gemoji](https://github.com/github/gemoji)
+* [emoji-data](https://github.com/iamcal/emoji-data)
+
+Many thanks to all these libraries' authors and contributors. A detailed list with descriptions and licenses is available [here](/app/vendor).
+
+
+### Licensing
+
+The source code is licensed under GPL v3. License is available [here](/LICENSE).
+
+
+### [Contribute](CONTRIBUTING.md)
